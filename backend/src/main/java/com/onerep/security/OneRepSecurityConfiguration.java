@@ -17,7 +17,7 @@ public class OneRepSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.jdbcAuthentication().dataSource(dataSource);
+        auth.jdbcAuthentication().dataSource(dataSource).;
     }
 
     @Override
@@ -27,9 +27,9 @@ public class OneRepSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/", "/register", "/aboutUs").permitAll().antMatchers("/welcome").hasAnyRole(ADMIN)
-                .antMatchers("/getEmployees").hasAnyRole(ADMIN).antMatchers("/addNewEmployee")
-                .hasAnyRole(ADMIN).anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
+        http.authorizeRequests().antMatchers("/", "/register", "/aboutUs")
+                .permitAll().antMatchers("/welcome").hasAnyRole(ADMIN)
+                .anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll()
                 .and().logout().permitAll();
 
         http.csrf().disable();
